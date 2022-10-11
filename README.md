@@ -22,14 +22,14 @@ Push the image to a public registry (Note: you may be required to authenticate i
 docker push <ImageName>:Tag  e.g. docker push genedemo/merchant:1
                                   docker push genedemo/shopping:1
   
-  Step Three: Creating a docker-compose file
+  # Step Three: Creating a docker-compose file
 Create a docker-compose.yml file for the merchant and shopping services application. This generates the manifest files
   Run kompose convert to convert the docker-compose.yml file into the corresponding deployment.yml, service.yml and cicdnetwork-networkpolicy.yml files.
   
 These files are used to deploy the corresponding applications in the eks cluster using
   kubectl apply -f <NameofDeployment>,<NameofService>,<NameofNetworkPolicy>  #(This stage is done only after the eks infrastructure has been provisioned as in Step 3 below)
   
-  Step Four: Provision an AWS Kubernetes cluster (eks) using Terraform
+  # Step Four: Provision an AWS Kubernetes cluster (eks) using Terraform
 Navigate to the Terraform manifest file k8s-eks-aws, and run Terraform init, Terraform validate, Terraform Plan, Terraform Apply
   terraform apply --auto-approve will provision the entire infrastructure by automating the process.
 Two outputs are generated which will be used to copy the kubeconfig file from kubernetes.
@@ -46,5 +46,13 @@ Two outputs are generated which will be used to copy the kubeconfig file from ku
   To check for running deployments, run the following command
   kubectl get deployments
   
-Step Five: Push all the working folders to GitHub
+  # Step Five: Push all the working folders to GitHub
+  From the local environment, run the following commands to push the work unto GitHub
+  git add .
+  git commit -am "message"
+  git remote add origin <urlofGitHubRepo>
+  git branch -M main
+  git push -u origin main
+  
+  
   
